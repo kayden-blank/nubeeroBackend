@@ -4,7 +4,7 @@ import java.util.Optional;
 import com.relief.reliefWeb.BasicInfo;
 import com.relief.reliefWeb.dto.*;
 import com.relief.reliefWeb.repo.BasicInfoRepo;
-import com.relief.reliefWeb.response.ApiResponse;
+import com.relief.reliefWeb.response.Responses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
     @Override
 //
 
-    public ApiResponse<Long> createBasicInfo(CreateBasicInfoDto basicInfoDto) {
+    public Responses<Long> createBasicInfo(CreateBasicInfoDto basicInfoDto) {
         try {
             BasicInfo basicInfo = new BasicInfo();
             basicInfo.setFullName(basicInfoDto.getFullName());
@@ -33,15 +33,15 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
 
             BasicInfo savedBasicInfo = basicInfoRepo.save(basicInfo);
 
-            return new ApiResponse<>(200, "Basic info created successfully", savedBasicInfo.getId());
+            return new Responses<>(200, "Basic info created successfully", savedBasicInfo.getId());
         } catch (Exception e) {
-            return new ApiResponse<>(500, "An error occurred while creating basic info", null);
+            return new Responses<>(500, "An error occurred while creating basic info", null);
         }
     }
 
     @Override
 
-    public ApiResponse<String> addOnboarding(Long id, OnboardingDto basicInfoDto) {
+    public Responses<String> addOnboarding(Long id, OnboardingDto basicInfoDto) {
         Optional<BasicInfo> basicInfoOptional = basicInfoRepo.findById(id);
 
         if (basicInfoOptional.isPresent()) {
@@ -52,14 +52,14 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
             basicInfo.setProjectFeatures(basicInfoDto.getProjectFeatures());
             basicInfoRepo.save(basicInfo);
 
-            return new ApiResponse<>(200, "Onboarding added successfully", "Onboarding details updated for ID " + id);
+            return new Responses<>(200, "Onboarding added successfully", "Onboarding details updated for ID " + id);
         } else {
-            return new ApiResponse<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
+            return new Responses<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
         }
     }
 
     @Override
-    public ApiResponse<String> addProjectBrief(Long id, ProjectBriefDto basicInfoDto) {
+    public Responses<String> addProjectBrief(Long id, ProjectBriefDto basicInfoDto) {
         Optional<BasicInfo> basicInfoOptional = basicInfoRepo.findById(id);
 
         if (basicInfoOptional.isPresent()) {
@@ -70,9 +70,9 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
             basicInfo.setImportance(basicInfoDto.getImportance());
             basicInfoRepo.save(basicInfo);
 
-            return new ApiResponse<>(200, "Project brief added successfully", "Project brief details updated for ID " + id);
+            return new Responses<>(200, "Project brief added successfully", "Project brief details updated for ID " + id);
         } else {
-            return new ApiResponse<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
+            return new Responses<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
         }
     }
 
@@ -80,7 +80,7 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
 
 
     @Override
-    public ApiResponse<String> addBranding(Long id, BrandingDto basicInfoDto) {
+    public Responses<String> addBranding(Long id, BrandingDto basicInfoDto) {
         Optional<BasicInfo> basicInfoOptional = basicInfoRepo.findById(id);
 
         if (basicInfoOptional.isPresent()) {
@@ -90,14 +90,14 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
             basicInfo.setServicesInNeedOf(basicInfoDto.getServicesInNeedOf());
             basicInfoRepo.save(basicInfo);
 
-            return new ApiResponse<>(200, "Branding added successfully", "Branding details updated for ID " + id);
+            return new Responses<>(200, "Branding added successfully", "Branding details updated for ID " + id);
         } else {
-            return new ApiResponse<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
+            return new Responses<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
         }
     }
 
     @Override
-    public ApiResponse<String> addFunding(Long id, FundingDto basicInfoDto) {
+    public Responses<String> addFunding(Long id, FundingDto basicInfoDto) {
         Optional<BasicInfo> basicInfoOptional = basicInfoRepo.findById(id);
 
         if (basicInfoOptional.isPresent()) {
@@ -107,14 +107,14 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
             basicInfo.setBudget(basicInfoDto.getBudget());
             basicInfoRepo.save(basicInfo);
 
-            return new ApiResponse<>(200, "Funding details added successfully", "Funding details updated for ID " + id);
+            return new Responses<>(200, "Funding details added successfully", "Funding details updated for ID " + id);
         } else {
-            return new ApiResponse<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
+            return new Responses<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
         }
     }
 
     @Override
-    public ApiResponse<String> addTimeline(Long id, TimeLineDto basicInfoDto) {
+    public Responses<String> addTimeline(Long id, TimeLineDto basicInfoDto) {
         Optional<BasicInfo> basicInfoOptional = basicInfoRepo.findById(id);
 
         if (basicInfoOptional.isPresent()) {
@@ -123,9 +123,9 @@ public class BasicInfoServiceImplementation implements BasicInfoService{
             basicInfo.setProjectCompletion(basicInfoDto.getProjectCompletion());
             basicInfoRepo.save(basicInfo);
 
-            return new ApiResponse<>(200, "Timeline added successfully", "Timeline details updated for ID " + id);
+            return new Responses<>(200, "Timeline added successfully", "Timeline details updated for ID " + id);
         } else {
-            return new ApiResponse<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
+            return new Responses<>(404, "BasicInfo with specified ID not found", "No BasicInfo found for ID " + id);
         }
     }
 
